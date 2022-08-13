@@ -10,3 +10,7 @@ myFunc2 = map (\x -> if x `elem` ['A'..'Z'] then x else '0') "Rico peDSdeJHo vLa
 
 -- return only capitals
 myFunc3 = map (filter (\x -> x `elem` ['A'..'Z'])) ["Hold On for Dear Life"]
+
+-- Define the type of the mystery
+itIsMystery xs = map (\x -> if elem x "aeiou" then x else '0') xs
+-- itIsMystery :: String -> String 
