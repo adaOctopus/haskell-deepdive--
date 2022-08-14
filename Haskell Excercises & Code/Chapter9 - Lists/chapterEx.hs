@@ -27,3 +27,7 @@ allUpper (x:xs) = (toUpper x) : allUpper xs
 -- N   I   K   O   s
 -- N   I   K   O   S
 -- NIKOS
+
+-- write a function that will capitalize the first letter of a String and return only that letter as the result.
+firstUp :: String -> Char
+firstUp word = toUpper . head $ word
