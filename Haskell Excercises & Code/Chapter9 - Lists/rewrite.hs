@@ -48,4 +48,9 @@ squishMap _ []     = []
 squishMap f (x:xs) = f x ++ squishMap f xs
 
 
+-- 7,8,9,10 were super BORING LOL. Apologies to the authors <3
+
+
+
+
 
