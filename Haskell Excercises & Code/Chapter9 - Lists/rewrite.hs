@@ -35,10 +35,17 @@ myReverse (x:xs) = myReverse xs ++ x : []
 
 
 -- 5. squish flattens a list of lists into a list
+-- Works only with up to two lists, need to make it infinite
 squish :: [[a]] -> [a]
 squish [[]]     = []
 squish [[x]]    = [x]
 squish [(x:xs)] = (x:xs)
-squish [(x:xs):(y:ys)] = (x:xs) ++ (y:ys)
+squish [(x:xs),(y:ys)] = (x:xs) ++ (y:ys)
+
+-- 6. squishMap maps a function over a list and concatenates the results.
+squishMap :: (Num a,Num b) => (a -> [b]) -> [a] -> [b]
+squishMap _ []     = []
+squishMap f (x:xs) = f x ++ squishMap f xs
+
 
 
