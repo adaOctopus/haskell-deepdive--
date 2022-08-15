@@ -25,3 +25,12 @@ myElem x [n]     = if x == n then True else False
 myElem k (x:xs) 
   | k == x = True 
   | k /= x = myElem k xs
+
+
+-- 4. Implement myReverse.
+myReverse :: [a] -> [a]
+myReverse []     = []
+myReverse [x]    = [x]
+myReverse (x:xs) = myReverse xs ++ x : []
+
+
