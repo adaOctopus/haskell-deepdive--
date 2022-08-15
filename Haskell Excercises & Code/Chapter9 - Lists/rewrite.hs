@@ -34,3 +34,11 @@ myReverse [x]    = [x]
 myReverse (x:xs) = myReverse xs ++ x : []
 
 
+-- 5. squish flattens a list of lists into a list
+squish :: [[a]] -> [a]
+squish [[]]     = []
+squish [[x]]    = [x]
+squish [(x:xs)] = (x:xs)
+squish [(x:xs):(y:ys)] = (x:xs) ++ (y:ys)
+
+
