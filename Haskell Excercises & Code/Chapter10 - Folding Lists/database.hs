@@ -36,5 +36,14 @@ sumDb xs = sum [x | DbNumber x <- xs]
 
 --substa :: [Maybe Int] -> Int
 -- substa = map sum
-                       
+
+-- .5 Write a function that gets the average of the DbNumber values.
+-- You'll probably need to use fromIntegral
+-- to get from Integer to Double.
+avgDb :: [DatabaseItem] -> Double
+avgDb xs = dominAtor / paranoma
+  where
+    dominAtor = fromIntegral . sum $ [x | DbNumber x <- xs]
+    paranoma = fromIntegral . length $ xs
+  
 
