@@ -19,3 +19,22 @@ theDatabase = [ DbDate (UTCTime
 -- a list of the UTCTime values inside them.
 filterDbDate :: [DatabaseItem] -> [UTCTime]
 filterDbDate (DbDate (UTCTime d dif):_) = [UTCTime d dif]
+
+
+-- 2. Write a function that filters for DbNumber values and returns
+-- a list of the Integer values inside them.
+filterDbNumber :: [DatabaseItem] -> [Integer]
+filterDbNumber [DbNumber n] = [n]
+
+-- 3. Write a function that gets the most recent date
+-- mostRecent :: [DatabaseItem] -> UTCTime
+-- mostRecent (x:xs) = \
+
+-- 4. Write a function that sums all of the DbNumber values.
+sumDb :: [DatabaseItem] -> Integer
+sumDb xs = sum [x | DbNumber x <- xs]
+
+--substa :: [Maybe Int] -> Int
+-- substa = map sum
+                       
+
