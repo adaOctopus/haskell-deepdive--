@@ -28,3 +28,15 @@ myFunc = map (>3) [2,3,4]
                                                         --         | otherwise   = False
                                                         -- but this is out of the scope of this exerc.
 
+
+-- 3. Write two versions of myElem. One version should use folding and the other should use any.
+-- Prelude> myElem 1 [1..10]
+-- True
+-- Prelude> myElem 1 [2..10]
+-- False
+-- Solution One fast, came naturally to code it like this.
+myElem :: Eq a => a -> [a] -> Bool
+myElem x [] = False
+myElem x (y:ys) = if x == y then True else go
+  where
+    go = myElem x ys
