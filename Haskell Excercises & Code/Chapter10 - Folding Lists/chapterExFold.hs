@@ -45,3 +45,10 @@ myElem x (y:ys) = if x == y then True else go
 myElem1 :: Eq a => a -> [a] -> Bool
 myElem1 x [] = False
 myElem1 x ys = any (==x) ys
+
+-- Solution using foldr 
+myElem2 ::  Eq a => a -> [a] -> Bool
+myElem2 x [] = False
+myElem2 x ys = foldr (\k -> (==) True) False listOfTruth
+  where
+    listOfTruth = [if k == x then True else False | k <- ys]
