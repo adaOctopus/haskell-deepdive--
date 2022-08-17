@@ -66,3 +66,7 @@ myMap :: (a -> b) -> [a] -> [b]
 -- myMap f (x:xs) = (\v vs -> f v : vs) x (map f xs)
 myMap f = foldr (\v vs -> f v : vs) []
 -- map (+1) [1,2,3]
+
+-- 6. My filter as filter with foldr
+myFilter :: (a -> Bool) -> [a] -> [a]
+myFilter f = foldr (\v vs -> if (f v) == True then v : vs else vs) []
