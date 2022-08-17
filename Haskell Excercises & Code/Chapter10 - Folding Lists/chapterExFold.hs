@@ -52,3 +52,17 @@ myElem2 x [] = False
 myElem2 x ys = foldr (\k -> (==) True) False listOfTruth
   where
     listOfTruth = [if k == x then True else False | k <- ys]
+
+
+-- 4. myReverse, in any way u want.
+
+myReverse :: [a] -> [a]
+myReverse []     = []
+myReverse (x:xs) = myReverse xs ++ x : [] 
+
+-- 5. Implement myMap with foldr and it should have exact behavior with map
+myMap :: (a -> b) -> [a] -> [b]
+-- myMap f []     = []
+-- myMap f (x:xs) = (\v vs -> f v : vs) x (map f xs)
+myMap f = foldr (\v vs -> f v : vs) []
+-- map (+1) [1,2,3]
