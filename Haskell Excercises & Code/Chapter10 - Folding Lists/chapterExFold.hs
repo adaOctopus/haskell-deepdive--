@@ -40,3 +40,8 @@ myElem x [] = False
 myElem x (y:ys) = if x == y then True else go
   where
     go = myElem x ys
+
+-- Solution using any
+myElem1 :: Eq a => a -> [a] -> Bool
+myElem1 x [] = False
+myElem1 x ys = any (==x) ys
