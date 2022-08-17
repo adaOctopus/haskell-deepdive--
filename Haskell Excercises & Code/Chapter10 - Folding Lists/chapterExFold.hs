@@ -70,3 +70,12 @@ myMap f = foldr (\v vs -> f v : vs) []
 -- 6. My filter as filter with foldr
 myFilter :: (a -> Bool) -> [a] -> [a]
 myFilter f = foldr (\v vs -> if (f v) == True then v : vs else vs) []
+
+-- 7. Flatten a list of lists to a list
+squish :: [[a]] -> [a]
+squish [[]]     = []
+squish ((xs)) = [i | i <- xs]
+
+-- There were 10 exercises in this 10.11 part of the book
+-- I got a bit overwhelmed to complete them all.
+-- Moving to chapter 11 now :)
