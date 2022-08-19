@@ -1,15 +1,9 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE FlexibleInstances #-}
 
+module Goats where
 
-module Goat where 
-
-
--- 11.9 Excercise Logic Goats
--- 1. Reusing the TooMany typeclass, write an instance of the
--- typeclass for th:re type (Int, String). This will require
--- adding a language pragma named FlexibleInstances5
--- if you do not use a newtype — GHC will tell you what to do.
+import Data.Int
 
 class TooMany a where 
     tooMany :: a -> Bool
@@ -28,3 +22,15 @@ data BigSmall = Big Bool | Small Bool deriving (Eq, Show)
 -- Bool has 2 possible types True or False, therefore cardinality 2
 -- Big has 2 , Small has 2
 -- Therefore BigSmall has 2 + 2 = 4 -> Cardinality
+
+
+data NumberOrBool = Numba Int8 | BoolyBool Bool deriving (Eq, Show)
+
+-- let myNumba = Numba (-128)
+
+data FlowerType = Gardenia | Daisy | Rose | Lilac deriving Show
+
+type Gardener = String
+data Garden = Garden Gardener FlowerType deriving Show
+
+-- data Garden = Garden Gardener Gardenia | Garden Gardener Daisy | Garden Gardener Rose | Garden Gardener Lilac
