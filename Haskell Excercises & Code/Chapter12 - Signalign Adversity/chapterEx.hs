@@ -32,7 +32,7 @@ countTheBeforeVowel sentence = findThe
 
 
 -- 3. Count vowels in a word
--- Completed
+-- COMPLETED!
 
 vowels = "aeiou"
 
@@ -41,6 +41,28 @@ countVowels wordi = numbrOfVowels
   where
     checkVowels = [ x | x <- wordi, x `elem` vowels]
     numbrOfVowels = length checkVowels
+
+
+-- Validate the word excercise
+-- COMPLETED!
+-- Count vowels and consonants, if vowels > consonants then return Nothing
+
+newtype Word' = Word' String deriving (Eq, Show)
+--vowels = "aeiou"
+
+mkWord :: String -> Maybe Word'
+mkWord wordi = case numVowels >= numConson of
+    True -> Nothing
+    _    -> Just (Word' wordi)
+
+    where
+        vowelsWord     = [i | i <- wordi, i `elem` vowels]
+        consonantsWord = [i | i <- wordi, i `notElem` vowels]
+        numVowels = length vowelsWord
+        numConson = length consonantsWord
+
+-- Exer It’s only Natural
+
 
 
 
