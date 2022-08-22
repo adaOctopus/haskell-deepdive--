@@ -1,9 +1,11 @@
+{-# LANGUAGE DeriveFoldable #-}
+
 module BinaryToList where
 
 
 -- Write functions to convert BinaryTree values to lists. Make
 -- certain your implementation passes the tests.
-data BinaryTree a = Leaf | Node (BinaryTree a) a (BinaryTree a) deriving (Eq, Ord, Show)
+data BinaryTree a = Leaf | Node (BinaryTree a) a (BinaryTree a) deriving (Eq, Ord, Show, Foldable)
 
 
 preorder :: BinaryTree a -> [a]
@@ -25,3 +27,11 @@ testPreorder = if preorder testTree == [2, 1, 3] then putStrLn "Preorder fine!" 
 
 testInorder :: IO ()
 testInorder = if inorder testTree == [1, 2, 3] then putStrLn "Inorder fine!" else putStrLn "Bad news bears."
+
+-- Exe. Write a foldr function for the  BinaryTree
+
+foldTree :: (a -> b -> b) -> b -> BinaryTree a -> b
+foldTree _ b Leaf = b
+foldTree f b (Node left a right) = f a $ (foldr (\x -> f x) b left)
+
+-- Node (Node Leaf 1 Leaf) 2 (Node Leaf 2 Leaf)
