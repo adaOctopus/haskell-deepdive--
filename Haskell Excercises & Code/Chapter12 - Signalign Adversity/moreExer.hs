@@ -41,3 +41,30 @@ isNothing _         = False
 -- >>> mayybee 0 (+1) (Just 1)
 -- 2
 mayybee :: b -> (a -> b) -> Maybe a -> b
+mayybee x _ Nothing  = x 
+mayybee x f (Just n) = f n 
+
+-- 3. In case you just want to provide a fallback value.
+-- >>> fromMaybe 0 Nothing
+-- 0
+-- >>> fromMaybe 0 (Just 1)
+-- 1
+fromMaybe :: a -> Maybe a -> a
+fromMaybe x Nothing  = x
+fromMaybe x (Just n) = n
+
+-- 4. Converting between List and Maybe.
+listToMaybe :: [a] -> Maybe a
+listToMaybe []     = Nothing
+listToMaybe (x:xs) = Just x
+-- >>> maybeToList (Just 1)
+-- [1]
+-- >>> maybeToList Nothing
+-- []
+maybeToList :: Maybe a -> [a]
+maybeToList Nothing  = []
+maybeToList (Just n) = [n]
+
+-- MyIterate, implement iterate function on your own
+myIterate :: (a -> a) -> a -> [a]
+myIterate f x = (f x) : (myIterate f (f x))
