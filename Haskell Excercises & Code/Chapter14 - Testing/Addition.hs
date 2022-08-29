@@ -58,3 +58,17 @@ genOrdering = elements [LT, EQ, GT]
 
 genChar :: Gen Char
 genChar = elements ['a'..'z']
+
+-- More complicated exampl4es
+
+genTuple :: (Arbitrary a, Arbitrary b) => Gen (a, b)
+genTuple = do
+    a <- arbitrary
+    b <- arbitrary
+    return (a, b)
+
+-- equal probability
+genMaybe :: Arbitrary a => Gen (Maybe a)
+genMaybe = do
+    a <- arbitrary
+    elements [Nothing, Just a]
