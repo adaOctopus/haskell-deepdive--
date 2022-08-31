@@ -1,6 +1,7 @@
 module ChapterEx where
 
 import Test.Hspec
+import Test.QuickCheck
 --import WordNumber (digitToWord, digits, wordNumber)
 
 -- From recursion functions
@@ -53,3 +54,24 @@ main = hspec $ do
          wordNumber 100 `shouldBe` "one-zero-zero-"
       it "nine-zero-zero-one for 9001" $ do
          wordNumber 9001 `shouldBe` "nine-zero-zero-one-"
+
+ -- for a function
+half x = x / 2
+-- this property should hold
+halfIdentity = (*2) . half
+
+randomGenList :: Gen [a]
+randomGenList = do
+    a <- arbitrary
+    return [a]
+
+randomList :: (Ord a) => Gen [a]
+randomList = randomGenList
+
+-- for any list you apply sort to
+-- this property should hold
+listOrdered :: (Ord a) => [a] -> Bool
+listOrdered xs = snd $ foldr go (Nothing, True) xs
+  where go _ status@(_, False) = status
+        go y (Nothing, t) = (Just y, t)
+        go y (Just x, t) = (Just y, x >= y)
