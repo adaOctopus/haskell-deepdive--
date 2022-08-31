@@ -80,5 +80,11 @@ listOrdered xs = snd $ foldr go (Nothing, True) xs
 myFunca :: Int -> Bool
 myFunca x = x + 1 > x
 
+plusAssociative :: Int -> Int -> Int -> Bool
+plusAssociative x y z = x + (y + z) == (x + y) + z
+plusCommutative x y = x + y == y + x
+
 mainTwo :: IO ()
-mainTwo = quickCheck myFunca
+mainTwo = quickCheck plusAssociative
+
+
