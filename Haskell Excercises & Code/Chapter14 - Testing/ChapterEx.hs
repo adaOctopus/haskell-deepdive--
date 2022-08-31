@@ -60,13 +60,13 @@ half x = x / 2
 -- this property should hold
 halfIdentity = (*2) . half
 
-randomGenList :: Gen [a]
+randomGenList :: Arbitrary a => Gen [a]
 randomGenList = do
     a <- arbitrary
-    return [a]
+    return a
 
-randomList :: (Ord a) => Gen [a]
-randomList = randomGenList
+
+randomList = sample' (randomGenList :: Gen [Int])
 
 -- for any list you apply sort to
 -- this property should hold
@@ -75,3 +75,10 @@ listOrdered xs = snd $ foldr go (Nothing, True) xs
   where go _ status@(_, False) = status
         go y (Nothing, t) = (Just y, t)
         go y (Just x, t) = (Just y, x >= y)
+
+
+myFunca :: Int -> Bool
+myFunca x = x + 1 > x
+
+mainTwo :: IO ()
+mainTwo = quickCheck myFunca
