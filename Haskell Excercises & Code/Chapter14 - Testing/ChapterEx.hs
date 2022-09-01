@@ -84,7 +84,20 @@ plusAssociative :: Int -> Int -> Int -> Bool
 plusAssociative x y z = x + (y + z) == (x + y) + z
 plusCommutative x y = x + y == y + x
 
+funcaUna :: Int -> Int -> Bool
+funcaUna x y = (quot x y)*y + (rem x y) == x
+
+funcaDos :: Int -> Int -> Bool
+funcaDos x y = (div x y)*y + (mod x y) == x
+
+funcaTres :: [Int] -> Bool
+funcaTres xs = (reverse $ reverse xs) == (id xs)
+
+
 mainTwo :: IO ()
-mainTwo = quickCheck plusAssociative
+mainTwo = quickCheck funcaTres
+
+
+
 
 
