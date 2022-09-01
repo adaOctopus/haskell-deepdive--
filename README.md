@@ -2,7 +2,7 @@
 This is a repository of my deepdive into haskell via using First Principles book. After doing 2 courses in Haskell in University of Nottingham, Im diving deeper with this 2,000 pages book -> Haskell from First Principles
 
 ## Chapters completed so far
--> 1. Lambda Calculus
+-> 1. Lambda Calculus\n
 -> 2. Hello Haskell
 -> 3. Strings
 -> 4. Basic Datatypes
