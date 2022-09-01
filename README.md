@@ -3,17 +3,17 @@ This is a repository of my deepdive into haskell via using First Principles book
 
 ## Chapters completed so far
 -> 1. Lambda Calculus <br/>
--> 2. Hello Haskell
--> 3. Strings
--> 4. Basic Datatypes
--> 5. Types
--> 6. Typeclasses
--> 7. Functional Patterns
--> 8. Recursion
--> 9. Lists
--> 10. Folding Lists
--> 11. Algebraic Datatypes
--> 12. Signaling Adversity
--> 13. Building Projects (cabal, stack)
--> 14. Testing
--> 15. Pending - Monoid Semigroup
+-> 2. Hello Haskell <br/>
+-> 3. Strings <br/>
+-> 4. Basic Datatypes <br/>
+-> 5. Types <br/>
+-> 6. Typeclasses <br/>
+-> 7. Functional Patterns <br/>
+-> 8. Recursion <br/>
+-> 9. Lists <br/>
+-> 10. Folding Lists <br/> 
+-> 11. Algebraic Datatypes <br/>
+-> 12. Signaling Adversity <br/>
+-> 13. Building Projects (cabal, stack) <br/>
+-> 14. Testing <br/>
+-> 15. Pending - Monoid Semigroup <br/>
