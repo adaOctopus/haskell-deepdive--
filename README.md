@@ -17,3 +17,6 @@ This is a repository of my deepdive into haskell via using First Principles book
 -> 13. Building Projects (cabal, stack) <br/>
 -> 14. Testing <br/>
 -> 15. Pending - Monoid Semigroup <br/>
+
+## Key point for understanding Monoid, Functor, Applicative and Monad is to start thinking of them as abstractions.
+Defined operations and the set of types those operations can be applied to.
