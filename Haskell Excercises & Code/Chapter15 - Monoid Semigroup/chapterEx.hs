@@ -45,10 +45,18 @@ genInteg = do
     x <- arbitrary
     frequency [(0, return Nothing), (1, return (Just x))]
 
-checkPositive = Prelude.length autogen
+checkPositive = autoGen
   where 
     autoGen     = sample' (genInteg :: Gen (Maybe Int))
 
-checkList = print $ checkPositive
+-- checkList = print $ checkPositive
 -- mainTwo :: IO ()
 -- mainTwo = sample' (genInteg :: Gen (Maybe Int))
+
+
+newtype BoolDisj = BoolDisj Bool
+
+instance Semigroup BoolDisj where
+    (<>) (BoolDisj True) _ = BoolDisj True
+    (<>) _ (BoolDisj True) = BoolDisj True
+    (<>) _ _               = BoolDisj False
