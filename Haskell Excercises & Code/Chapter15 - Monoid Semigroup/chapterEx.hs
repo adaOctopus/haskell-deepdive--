@@ -54,7 +54,7 @@ checkPositive = autoGen
 -- mainTwo = sample' (genInteg :: Gen (Maybe Int))
 
 
-newtype BoolDisj = BoolDisj Bool
+newtype BoolDisj = BoolDisj Bool deriving (Eq, Show)
 
 instance Semigroup BoolDisj where
     (<>) (BoolDisj True) _ = BoolDisj True
@@ -63,3 +63,5 @@ instance Semigroup BoolDisj where
 
 instance Arbitrary BoolDisj where
     arbitrary = frequency [ (1, return (BoolDisj False)), (1, return (BoolDisj True)) ]
+
+e8 = quickCheck (semigroupAssoc :: BoolDisj -> BoolDisj -> BoolDisj -> Bool)
