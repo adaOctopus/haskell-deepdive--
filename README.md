@@ -20,3 +20,5 @@ This is a repository of my deepdive into haskell via using First Principles book
 
 ## Key point for understanding Monoid, Functor, Applicative and Monad is to start thinking of them as abstractions.
 Defined operations and the set of types those operations can be applied to.
+
+-> Chapter 15. Basically Semigroup is Monoid one leg off. Which is the requirement to fulfill the `Identity` law
