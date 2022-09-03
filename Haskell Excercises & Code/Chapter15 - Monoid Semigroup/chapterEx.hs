@@ -60,3 +60,6 @@ instance Semigroup BoolDisj where
     (<>) (BoolDisj True) _ = BoolDisj True
     (<>) _ (BoolDisj True) = BoolDisj True
     (<>) _ _               = BoolDisj False
+
+instance Arbitrary BoolDisj where
+    arbitrary = frequency [ (1, return (BoolConj False)), (1, return (BoolConj True)) ]
