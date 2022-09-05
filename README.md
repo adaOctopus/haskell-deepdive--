@@ -22,3 +22,5 @@ This is a repository of my deepdive into haskell via using First Principles book
 Defined operations and the set of types those operations can be applied to.
 
 -> Chapter 15. Basically Semigroup is Monoid one leg off. Which is the requirement to fulfill the `Identity` law
+Semigroups and Monoids are basically ways to express operations on a specific set/type
+Think of it as a blueprint. Describing a behavior you want your types to have.
