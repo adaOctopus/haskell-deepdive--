@@ -25,3 +25,17 @@ Defined operations and the set of types those operations can be applied to.
 -> Chapter 15. Basically Semigroup is Monoid one leg off. Which is the requirement to fulfill the `Identity` law
 Semigroups and Monoids are basically ways to express operations on a specific set/type
 Think of it as a blueprint. Describing a behavior you want your types to have.
+
+## Functor Laws
+
+1. Identity
+
+**`fmap id == id`**
+
+2. Composition law
+
+**`fmap (f . g) == fmap f . fmap g`** 
+This concerns the composability of fmap. If we compose two functions, 𝑓 and 𝑔, and fmap that over some structure, we should get the same result as if we fmapped them and then composed them:
+
+Remember instances of functors expect higher kinded params as in
+* -> * instead of type constants of type kind *
