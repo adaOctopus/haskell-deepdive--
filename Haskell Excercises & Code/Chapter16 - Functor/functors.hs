@@ -18,3 +18,6 @@ fixedList = [Just 1, Nothing, Just 2]
 -- returns -> [Just 'p', Nothing, Just 'p']
 -- when fmap replaceWithP fixedList simply returns "ppp"
 -- I do not understand the reasoning
+
+-- class Functor f where
+     --fmap :: ( a -> b) -> f a -> f b
