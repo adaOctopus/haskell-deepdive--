@@ -42,7 +42,7 @@ Remember instances of functors expect higher kinded params as in
 
 Here, functorial structure is the `f`
 
-instance Functor (Two a) where
+instance Functor (Two a) where < br/>
 fmap f (Two a b) = Two $ (f a) (f b)
 
 (Two a) -> is the functorial structure f
