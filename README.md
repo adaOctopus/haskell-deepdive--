@@ -39,3 +39,20 @@ This concerns the composability of fmap. If we compose two functions, 𝑓 and �
 
 Remember instances of functors expect higher kinded params as in
 * -> * instead of type constants of type kind *
+
+Here, functorial structure is the `f`
+
+instance Functor (Two a) where
+fmap f (Two a b) = Two $ (f a) (f b)
+
+(Two a) -> is the functorial structure f
+where data type = Two a b = Two a b ( but the functorial structure needs to be higher-kinded * -> *
+
+`But remember`
+Functor is supposed to leave the functorial structure UNTOUCHED and only ammend the within values
+This won’t fly, because the 𝑎 is part of the functorial structure (the 𝑓). We’re not supposed to touch anything in the 𝑓 referenced in the type of fmap, so we can’t apply the function (named 𝑓 in our fmap definition) to the 𝑎 because the 𝑎 is now untouchable.
+
+Therefore we cannot touche the `a` as it is a part fo the functorial so we can only ammend the inner most value, thats why in tuples we only fmap the second value
+
+instance Functor (Two a) where 
+fmap f (Two a b) = Two a (f b)
