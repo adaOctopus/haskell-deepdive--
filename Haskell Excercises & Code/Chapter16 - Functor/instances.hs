@@ -45,9 +45,46 @@ instance Functor (Four a b c) where
 data Four' a b = Four' a a a b
 
 instance Functor (Four' a) where 
-    fmap f (Four' a1 a2 a3 b1) = Four a1 a2 a3 (f b1)
+    fmap f (Four' a1 a2 a3 b1) = Four' a1 a2 a3 (f b1)
 
 -- 8.
 data Trivial = Trivial
 -- We cannot define functor for this cause it is a concrete type and not a higher-kinded one.
 -- There is no structure to fmap
+
+-- Maybe Instance similar
+
+data Possibly a = LolNope | Yeppers a deriving (Eq, Show)
+
+instance Functor Possibly where 
+    fmap f (Yeppers a) = Yeppers (f a)
+    fmap f LolNope     = LolNope
+
+
+-- If it helps, you’re basically writing the following function:
+-- applyIfJust :: (a -> b) -> Maybe a -> Maybe b
+
+liftedInc :: (Functor f, Num b) => f b -> f b
+liftedInc = fmap (+1)
+
+-- Write functor instance similar to Either but with our datatype
+data Sum a b = First a | Second b deriving (Eq, Show)
+
+instance Functor (Sum a) where 
+    fmap f (First a1)  = First a1
+    fmap f (Second b1) = Second (f b1)
+
+
+-- IO Functor
+meTooIsm :: IO String
+meTooIsm = do
+    input <- getLine
+    return (input ++ "and me too!")
+
+getInt :: IO Int
+getInt = read <$> getLine
+
+bumpIt :: IO Int
+bumpIt = do
+    intVal <- getInt
+    return (intVal + 1)
