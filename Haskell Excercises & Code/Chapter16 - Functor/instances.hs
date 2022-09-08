@@ -32,3 +32,22 @@ data Three' a b = Three' a b b
 
 instance Functor (Three' a) where
     fmap f (Three' a1 b1 b2) = Three' a1 (f b1) (f b2)
+
+
+-- 6. 
+data Four a b c d = Four a b c d
+
+instance Functor (Four a b c) where
+    fmap f (Four a1 b1 c1 d1) = Four a1 b1 c1 (f d1)
+
+
+-- 7. 
+data Four' a b = Four' a a a b
+
+instance Functor (Four' a) where 
+    fmap f (Four' a1 a2 a3 b1) = Four a1 a2 a3 (f b1)
+
+-- 8.
+data Trivial = Trivial
+-- We cannot define functor for this cause it is a concrete type and not a higher-kinded one.
+-- There is no structure to fmap
