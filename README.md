@@ -55,7 +55,7 @@ This won’t fly, because the 𝑎 is part of the functorial structure (the 𝑓
 Therefore we cannot touche the `a` as it is a part fo the functorial so we can only ammend the inner most value, thats why in tuples we only fmap the second value
 
 instance Functor (Two a) where 
-fmap f (Two a b) = Two a (f b) < br />
+fmap f (Two a b) = Two a (f b) <br/>
 `Example instance`
 
 data Three a b c = Three a b c deriving (Eq, Show)
@@ -63,5 +63,5 @@ data Three a b c = Three a b c deriving (Eq, Show)
 instance Functor (Three a) where
   fmap f (Three a1 b1 c1) = Three a1 (f b1) (f c1)
   
-*Notice that whatever is after Functor in the instance aka the `f` functorial structure, it does not get altered* <br />
+*Notice that whatever is after Functor in the instance aka the `f` functorial structure, it does not get altered* <br/>
 Because functor is about changing the values of a structure, not the structure itself.
