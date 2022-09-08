@@ -56,3 +56,12 @@ Therefore we cannot touche the `a` as it is a part fo the functorial so we can o
 
 instance Functor (Two a) where 
 fmap f (Two a b) = Two a (f b)
+`Example instance`
+
+data Three a b c = Three a b c deriving (Eq, Show)
+
+instance Functor (Three a) where
+  fmap f (Three a1 b1 c1) = Three a1 (f b1) (f c1)
+  
+*Notice that whatever is after Functor in the instance aka the `f` functorial structure, it does not get altered*
+Because functor is about changing the values of a structure, not the structure itself.
