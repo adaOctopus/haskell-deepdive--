@@ -32,3 +32,5 @@ d = ((return '1' ++) . show) (\x -> [x, 1..3])
 --         changed = read ("123"++) show ioi in (*3) changed
 -- Prelude> e
 -- 3693
+
+
