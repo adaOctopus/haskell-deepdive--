@@ -109,4 +109,12 @@ data Notorious g o a t = Notorious (g o) (g a) (g t)
 
 -- Epiphany : Always ammend the innermost
 instance (Functor g) => Functor (Notorious g o a) where
-    fmap func (Notorious f1 f2 f3) = Notorious f1 f2 $ (fmap func f3) 
+    fmap func (Notorious f1 f2 f3) = Notorious f1 f2 $ (fmap func f3)
+
+-- 9. You’ll need to use recursion.
+-- Tried with both 1 and 2 arguments to test my understanding (List a & List a b)
+data List a b = Nil b | Cons a (List a b)
+
+instance Functor (List a) where
+    fmap f (Nil b)               = Nil (f b)
+    fmap f (Cons a lista) = Cons a $ (fmap f lista) 
