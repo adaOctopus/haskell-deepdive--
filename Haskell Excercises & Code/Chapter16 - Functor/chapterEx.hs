@@ -100,3 +100,13 @@ instance (Functor f, Functor g) => Functor (Parappa f g) where
 
 -- 7.
 data IgnoreOne f g a b = IgnoringSomething (f a) (g b)
+
+instance (Functor f, Functor g) => Functor (IgnoreOne f g a) where
+    fmap func (IgnoringSomething f1 f2) = IgnoringSomething f1 $ (fmap func f2)
+
+-- 8. 
+data Notorious g o a t = Notorious (g o) (g a) (g t)
+
+-- Epiphany : Always ammend the innermost
+instance (Functor g) => Functor (Notorious g o a) where
+    fmap func (Notorious f1 f2 f3) = Notorious f1 f2 $ (fmap func f3) 
