@@ -88,3 +88,13 @@ bumpIt :: IO Int
 bumpIt = do
     intVal <- getInt
     return (intVal + 1)
+
+-- Monoid instance
+-- What do we need to include?
+-- Identity & associativity
+
+data Choice a = Wrong | Right a deriving (Eq, Show)
+
+-- instance Monoid Choice where
+--     mempty = Wrong
+--     mappend _ (Right alpa) = 
