@@ -117,4 +117,24 @@ data List a b = Nil b | Cons a (List a b)
 
 instance Functor (List a) where
     fmap f (Nil b)               = Nil (f b)
-    fmap f (Cons a lista) = Cons a $ (fmap f lista) 
+    fmap f (Cons a lista) = Cons a $ (fmap f lista)
+
+
+-- 10. Goatlord
+data GoatLord a = NoGoat | OneGoat a | MoreGoats (GoatLord a) (GoatLord a) (GoatLord a)
+
+instance Functor GoatLord where
+    fmap f NoGoat               = NoGoat
+    fmap f (OneGoat a)          = OneGoat (f a)
+    fmap f (MoreGoats g1 g2 g3) = MoreGoats (fmap f g1) (fmap f g2) (fmap f g3)
+
+
+-- 11. Last one: 
+data TalkToMe a = Halt | Print String a | Read (String -> a)
+
+instance Functor TalkToMe where
+    fmap f Halt = Halt
+    fmap f (Print s a) = Print s (f a)
+    fmap f (Read func) = Read $ fmap f func
+
+
