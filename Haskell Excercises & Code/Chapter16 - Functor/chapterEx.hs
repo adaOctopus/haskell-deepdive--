@@ -1,4 +1,8 @@
+{-# LANGUAGE FlexibleInstances #-}
+
 module ChapterEx where
+
+
 
 data Option = Death | Life deriving (Show, Eq)
 
@@ -47,3 +51,42 @@ instance Functor (More x) where -- think like More a
 
 
 -- Ex.3 Write Functor instances for the data types
+
+-- 1. 
+data Quant a b = Finance | Desk a | Bloor b deriving (Eq,Show)
+
+-- Functor instance
+instance Functor (Quant a) where
+    fmap f Finance = Finance
+    fmap f (Desk alpha) = Desk alpha
+    fmap f (Bloor beta) = Bloor (f beta)
+
+-- 2.
+data K a b = K a
+
+-- Functor instance
+instance Functor (K a) where
+    fmap f (K alpha) = K alpha
+
+
+-- 3. 
+newtype Flip f a b = Flip (f b a) deriving (Eq, Show)
+--newtype K a b = K a
+
+-- should remind you of an
+-- -- instance you've written before
+
+-- instance Functor (Flip K a) where
+--   fmap f (Flip (K a)) = Flip $ K (f a)
+
+-- 4.
+data EvilGoateeConst a b = GoatyConst b
+
+instance Functor (EvilGoateeConst a) where
+    fmap f (GoatyConst a) = GoatyConst (f a)
+
+-- 5. Will that work?
+data LiftItOut f a = LiftItOut (f a)
+
+instance Functor f => Functor (LiftItOut f) where 
+    fmap func (LiftItOut x) = LiftItOut $ fmap func x
