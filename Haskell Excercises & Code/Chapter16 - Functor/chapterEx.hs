@@ -90,3 +90,13 @@ data LiftItOut f a = LiftItOut (f a)
 
 instance Functor f => Functor (LiftItOut f) where 
     fmap func (LiftItOut x) = LiftItOut $ fmap func x
+
+
+-- 6.
+data Parappa f g a = DaWrappa (f a) (g a)
+
+instance (Functor f, Functor g) => Functor (Parappa f g) where
+    fmap func (DaWrappa f1 f2) = DaWrappa (fmap func f1) (fmap func f2)
+
+-- 7.
+data IgnoreOne f g a b = IgnoringSomething (f a) (g b)
