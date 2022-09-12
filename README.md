@@ -17,7 +17,7 @@ This is a repository of my deepdive into haskell via using First Principles book
 -> 13. Building Projects (cabal, stack) <br/>
 -> 14. Testing <br/>
 -> 15. Monoid Semigroup <br/>
--> 16. Pending - Functor <br/>
+-> 16. Functor <br/>
 
 ## Key point for understanding Monoid, Functor, Applicative and Monad is to start thinking of them as abstractions.
 Defined operations and the set of types those operations can be applied to.
@@ -65,3 +65,6 @@ instance Functor (Three a) where
   
 *Notice that whatever is after Functor in the instance aka the `f` functorial structure, it does not get altered* <br/>
 Because functor is about changing the values of a structure, not the structure itself.
+Completing excercises for Functor instances was super useful to understand how functors work. Change the values within a structure.
+
+-> 17. Pending - Applicative <br/>
