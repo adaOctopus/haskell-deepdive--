@@ -68,3 +68,8 @@ Because functor is about changing the values of a structure, not the structure i
 Completing excercises for Functor instances was super useful to understand how functors work. Change the values within a structure.
 
 -> 17. Pending - Applicative <br/>
+`Notes on Applicatives` <br/>
+
+For applicative to work, we need functions inside some functorial structure
+If the functions we want to apply are not in a structure, then we use pure f <*>
+In that way the functions get wrapped by some structural context
