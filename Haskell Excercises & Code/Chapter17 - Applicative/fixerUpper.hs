@@ -1,5 +1,7 @@
 module FixerUpper where
 
+-- THIS ALSO INCLUDES APPLICATIVE LAWS
+
 import Control.Applicative
 import Test.QuickCheck
 -- 1.
@@ -13,7 +15,9 @@ funca1 = pure const <*> Just "Hello" <*> Just "World"
 -- 
 funca2 = (,,,) <$> Just 90 <*> Just 10 <*> Just "Tierness" <*> pure [1, 2, 3]
 
--- Define identity laws and test their equality
+-- APPLICATIVE LAWS
+
+-- Define 1. IDENTITY laws and test their equality
 law1 = id [1,2,3]
 
 -- Functor
@@ -27,3 +31,23 @@ checkIdent xs = id xs == fmap id xs
 
 runQuickCheck :: IO ()
 runQuickCheck = quickCheck (checkIdent :: [Int] -> Bool)
+
+-- 2. COMPOSITION LAW
+
+pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
+
+-- This law is meant to ensure that there are no surprises
+-- resulting from composing your function applications.
+-- I.E
+-- pure (.)
+-- <*> [(+1)]
+-- <*> [(*2)]
+-- <*> [1, 2, 3]
+-- [(+1)] <*> ([(*2)] <*> [1, 2, 3])
+
+-- 3. HOMOMORPHISM
+
+-- A homomorphism is a structure-preserving map between
+-- two algebraic structures. The effect of applying a function that is embedded in some structure to a value that is
+-- embedded in some structure should be the same as applying a function to a value without affecting any outside
+-- structure:
