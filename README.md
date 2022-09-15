@@ -75,7 +75,7 @@ If the functions we want to apply are not in a structure, then we use pure f <*>
 In that way the functions get wrapped by some structural context
 
 ## APPLICATIVE LAWS PRACTICE NOTES
--- APPLICATIVE LAWS
+-- APPLICATIVE LAWS<br/>
 
 -- Define 1. IDENTITY laws and test their equality
 law1 = id [1,2,3]
@@ -92,7 +92,7 @@ checkIdent xs = id xs == fmap id xs
 runQuickCheck :: IO ()
 runQuickCheck = quickCheck (checkIdent :: [Int] -> Bool)
 
--- 2. COMPOSITION LAW
+-- 2. COMPOSITION LAW <br/>
 
 pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
 
@@ -105,7 +105,7 @@ pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
 -- <*> [1, 2, 3]
 -- [(+1)] <*> ([(*2)] <*> [1, 2, 3])
 
--- 3. HOMOMORPHISM
+-- 3. HOMOMORPHISM<br/>
 
 -- A homomorphism is a structure-preserving map between two algebraic structures.
 -- The effect of applying a function that is embedded in some structure to a value that is
@@ -119,7 +119,7 @@ pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
 -- change the structure around the values.
 
 
--- 4. INTERCHANGE LAW
+-- 4. INTERCHANGE LAW<br/>
 -- We begin again by looking at the definition of the interchange law:
 -- u <*> pure y = pure ($ y) <*> u
 
