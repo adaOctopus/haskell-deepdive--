@@ -6,5 +6,8 @@ import Control.Applicative
 -- funca1 :: (Show a, Show b) => f (a -> b) -> Maybe String -> Maybe String 
 -- added pure and <*> and Just
 funca1 = pure const <*> Just "Hello" <*> Just "World"
+
+
 -- 2. 
--- (,,,) Just 90 <*> Just 10 Just "Tierness" [1, 2, 3]
+-- 
+funca2 = (,,,) <$> Just 90 <*> Just 10 <*> Just "Tierness" <*> pure [1, 2, 3]
