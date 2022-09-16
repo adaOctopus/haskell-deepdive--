@@ -14,3 +14,5 @@ instance Applicative List where
     Nil <*> _ = Nil
     _ <*> Nil = Nil
     Cons f x <*> y = (f <$> y) <> (x <*> y)
+
+
