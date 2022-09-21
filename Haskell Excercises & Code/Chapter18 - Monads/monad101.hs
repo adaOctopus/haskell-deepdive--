@@ -8,8 +8,7 @@ import Control.Monad (join)
 -- => (a -> b) -> f a -> f b
 -- <*> :: Applicative f
 -- => f (a -> b) -> f a -> f b
--- >>= :: Monad f
--- => f a -> (a -> f b) -> f
+-- >>= :: Monad f => f a -> (a -> f b) -> f
 
 ------------------------------------------------
 ------------------------------------------------
@@ -22,3 +21,10 @@ import Control.Monad (join)
 -- keep in mind this is (>>=) flipped
 bind :: Monad m => (a -> m b) -> m a -> m b
 bind f x = join $ fmap f x
+
+twiceWhenEven :: [Integer] -> [Integer]
+twiceWhenEven xs = do
+    x <- xs
+    if x > 5
+      then [x*2]
+      else []
