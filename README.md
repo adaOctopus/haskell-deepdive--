@@ -135,7 +135,7 @@ It is completely out of scope for my purpose.
 I am learning Haskell to build smart contracts on Cardano using Plutus & Plutarch which are built on top of Haskell
 Not to build Haskell projects.
 For my purposes after completing all 18 chapters which are essential to building on Plutus
-The rest of the book will be just about reading and becoming familiar
+The rest of the book will be just about reading and becoming familiar<br/>
 `Here the final chapters I will focus on`
 1. Foldable - Chapter 20
 2. Traversable - Chapter 21
