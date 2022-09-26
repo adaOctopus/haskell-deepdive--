@@ -100,3 +100,95 @@ instance Monoid a => Monoid (MyFlag a) where
     mappend (Moving a) (Moving b) = Moving (mappend a b)
 
 
+-- Functors
+{-- Typeclass definition:
+class Functor f where
+    fmap :: (a -> b) -> f a -> f b
+-- Laws:
+-- Identiy Law:
+fmap id == id
+-- Composition Law:
+fmap (f . g) == fmap f . fmap g
+-}
+
+-- The identity law enforces the constraint that the functor does not change
+-- the outer structure of f, just the internal values.  The second law also
+-- deals with preservation of structure, this time by allowing us to compose
+-- functions.
+
+-- Note that in function definitions, all paremeter variables have to have
+-- the concrete kind type *.
+
+instance Functor MyFlag where
+    fmap f Burned = Burned
+    fmap f (Moving x) = Moving (f x)
+
+
+-- Applicative is a monoidal functor, in a sense.
+-- It allows for function application lifted over structure, but the function we're
+-- applying is itself embedded in some structure.
+--
+{-- Definition
+class Functor f => Applicative f where
+    pure :: a -> f a
+    (<*>) :: f (a -> b) -> f a -> f b
+--}
+
+ex1 = [(*2), (*3)] <*> [4, 5]
+ex2 = Just (*2) <*> Just 3
+ex3 = ("Woo", (+1)) <*> ("hoo!", 0) :: (String, Int)
+
+{-- The last example works beause we have:
+instance Monoid a => Applicative ((,) a) where
+    pure x = (mempty, x)
+    (u, f) <*> (v, x) = (u <> v, f x)
+-- Note that as with Functor, Applicative takes an argument of kind * -> *
+--}
+
+-- ============== APPLICATIVE LAWS ====================
+-- ====================================================
+
+-- -- {{{{ Identity }}}}
+-- pure id <*> v = v
+
+-- {{{ Homomorphism }}}
+
+-- A homomorphism is a structure-preserving map between
+-- two algebraic structures. The effect of applying a function that is embedded in some structure to a value that is
+-- embedded in some structure should be the same as applying a function to a value without affecting any outside
+-- structure
+-- pure f <*> pure x = pure (f x)
+
+-- -- {{{ {Interchange }}}}
+-- u <*> pure y = pure ($ y) <*> u
+
+-- -- Composition
+-- Same as functors
+-- The result of composing our functions first and then applying them should be the same as applying them first and then composing
+-- pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
+
+instance Applicative MyFlag where
+    pure x = Moving x
+    _ <*> Burned = Burned
+    Burned <*> _ = Burned
+    (Moving f) <*> (Moving b) = Moving (f b)
+
+instance Monad MyFlag where
+    return x = Moving x
+    Burned >>= _ = Burned
+    (Moving a) >>= f = f a
+
+
+-- =========== Monads ============================
+-- ===============================================
+    
+-- Applicative Functors with bind and sequencing functions
+-- The generalization here is that we can do mappings that generate additional
+-- layers of structure, but we can also 'concat' that structure back down to
+-- just the original layer.
+--
+-- The "secret sauce" of Monads is the join function, which lets us strip
+-- away a layer of structure:
+-- join :: Monad m => m (m a) -> m a
+-- bind :: Monad m => (a -> m b) -> m a -> m b
+-- bind f m = join $ fmap f m
