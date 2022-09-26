@@ -249,3 +249,26 @@ return x >>= f = f x
 -- our functions first and then applying them and the result of applying the functions first then composing them
 -- should be the same.
 -- -- pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
+
+-- Monad laws (3)
+-- 1. Left identity
+-- m >>= return = m
+-- 2. Right identity
+-- return x >>= f = f x
+-- 3. Associativity
+-- (m >>= f) >>= g = m >>= (\x -> f x >>= g)
+
+-- class Applicative m => Monad m where
+--     return :: a -> m a
+--     (>>=) :: m a -> (a -> m b)
+--     (>>)  :: m a -> m b -> m b
+
+
+-- Monoid Laws (3)
+-- left identity
+-- mappend mempty x = x
+-- -- right identity
+-- mappend x mempty = x
+-- -- associativity
+-- mappend x (mappend y z) =
+-- mappend (mappend x y) z
