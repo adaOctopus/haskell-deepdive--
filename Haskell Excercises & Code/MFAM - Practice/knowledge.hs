@@ -181,7 +181,7 @@ instance Monad MyFlag where
 
 -- =========== Monads ============================
 -- ===============================================
-    
+
 -- Applicative Functors with bind and sequencing functions
 -- The generalization here is that we can do mappings that generate additional
 -- layers of structure, but we can also 'concat' that structure back down to
@@ -192,3 +192,60 @@ instance Monad MyFlag where
 -- join :: Monad m => m (m a) -> m a
 -- bind :: Monad m => (a -> m b) -> m a -> m b
 -- bind f m = join $ fmap f m
+
+--  ===========================================================================
+--                             Monad Laws
+--  ===========================================================================
+{-- 1. Left Identity
+m >>= return = m
+-- 2. Right Identity
+return x >>= f = f x
+-- 3. Associativity
+(m >>= f) >>= g = m >>= (\x -> f x >>= g)
+--}
+
+-- The laws can be checked with quickBatch:
+-- q1 = quickBatch $ monad (undefined :: [(Int, Int, Int)])
+
+
+-- Kleisli Composition
+-- If I have two monads f and g and I'd like to compose them, I need something like this:
+-- mcomp :: Monad m => (b -> m c) -> (a -> m b) -> a -> m c
+-- mcomp f g a = g a >>= f
+-- Kleisli to get is to get composition
+-- (.) :: (b -> c) -> (a -> b) -> a -> c
+-- f . g ==> g takes an `a` and returns a `b` , f takes a `b` and returns a `c`
+-- Kleisli is the flip of it
+-- (thoughtKleisli) :: (a -> b) -> (b -> c) -> a -> c
+--- BUUUUUUT FOR MONADIC STRUCTURES SO THE TYPE SIGNATURE IS:
+-- (>=>) :: (a -> M b) -> (b -> M c) -> a -> M c
+
+-- Functor laws (2)
+-- key operator -> fmap : (<$>)
+-- class Monoid f => Functor f where
+--     fmap :: (a -> b) -> f a -> f b
+
+-- 1 identity ==> fmap id = id ==> fmap id [1,2,3] == id [1,2,3] returns True
+-- 2 composition ===> (fmap f) . (fmap g) == fmap (f . g)
+
+-- Applicative Laws (4)
+-- key operators -> pure & (<*>)
+-- Left to the (<*>) operator, always goes the functions embedded in a structure (unless we interchange)
+-- class Functor f => Applicative f where
+--     pure :: a -> f a
+--     (<*>) :: f (a -> b) -> f a -> f b
+
+-- 1. Identity
+-- pure id <*> v = v
+-- 2. Homomorphism
+-- pure f <*> pure x = pure (f x)
+-- Applying the function embeded to the structure, to a value embedded to a structure, should be like leaving the structure untouched.
+-- 3. Interchange
+-- u <*> pure x = pure ($ x) <*> u
+-- Where u is a function embeded in the structure
+-- 4. Composition
+-- This is similar to the law of composition for
+-- Functor. It is the law stating that the result of composing
+-- our functions first and then applying them and the result of applying the functions first then composing them
+-- should be the same.
+-- -- pure (.) <*> u <*> v <*> w = u <*> (v <*> w)
