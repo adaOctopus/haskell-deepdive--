@@ -1,6 +1,7 @@
 module ExerChapter where
 -- Write Instances for the following data types
 
+import Control.Applicative (liftA3)
 -- 1
 data Pair a = Pair a a deriving Show
 
@@ -43,7 +44,7 @@ instance Functor (Three' a) where
 
 instance Monoid a => Applicative (Three' a) where
     pure x = Three' mempty x x
-    (Three' a1 f1 f2) <*> (Three' a1' f1' f2') = Three' (a1 <> a1') (f1 <*> f1') (f2 <*> f2')
+    (Three' a1 f1 f2) <*> (Three' a1' f1' f2') = Three' (a1 <> a1') (f1 f1') (f2 f2')
 
 -- 5
 data Four a b c d = Four a b c d
@@ -53,6 +54,21 @@ instance Functor (Four a b c) where
 
 instance (Monoid a, Monoid b, Monoid c) => Applicative (Four a b c) where
     pure x = Four mempty mempty mempty x
-    
+    (Four a b c f) <*> (Four a' b' c' d) = Four (a <> a') (b <> b') (c <> c') (f d)    
 
- 
+-- 6. 
+data Four' a b = Four' a a a b
+
+instance Functor (Four' a) where
+    fmap f (Four a1 a2 a3 b1) = Four' a1 a2 a3 (f b1)
+
+instance (Monoid a) => Applicative (Four' a) where
+    pure x = Four' mempty mempty mempty x
+    (Four' a1 a2 a3 f) <*> (Four' a1' a2' a3' b) = Four (a1 <> a1') (a2 <> a2') (a3 <> a3') (f b)
+
+stops :: String
+stops = "pbtdkg"
+vowels :: String
+vowels = "aeiou"
+combos :: [a] -> [b] -> [c] -> [(a, b, c)]
+combos = undefined
