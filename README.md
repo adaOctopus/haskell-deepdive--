@@ -145,9 +145,40 @@ The rest of the book will be just about reading and becoming familiar<br/>
 6. Non strictness - Chapter 27
 7. IO - Chapter 29
 
+</br>
 18. Monads -> Completed
 Thing to remember the unique sauce of monads is the join function m (m a) -> m a
 - The laws for monads are 3, left identity, right identity, associativity
 - The laws for functors are 2, identity & composition
 - The laws for applicatives are 4, identity, interchange, composition, homomorphism
+
+### Functors Laws(2)</br>
+#### 1. Identity Law
+`fmap id == id`</br>
+
+#### 2. Composition Law
+`(fmap f) . (fmap g) == fmap (f . g)`</br>
+
+### Applicative Laws(4)</br>
+#### 1. Identity Law
+`pure id <*> u == u`</br>
+
+#### 2. Homomorphism Law
+`pure f <*> pure x == pure (f x)`</br>
+
+#### 3. Interchange Law
+`y <*> pure u == pure ($ u) <*> y`</br>
+
+#### 4. Composition
+` pure (.) <*> u <*> v <*> w = u <*> (v <*> w)`</br>
+
+### Monad Laws (3)</br>
+#### 1. Left identity
+`m >>= return = m `</br>
+
+### 2. Right identity
+`return m >>= f = f m`</br>
+
+### 3. Assocatiavity
+`(m >>= f) >>= g = m >>= (\x -> f x >>= g)`</br>
 
