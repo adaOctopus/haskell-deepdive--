@@ -144,3 +144,10 @@ The rest of the book will be just about reading and becoming familiar<br/>
 5. Monad Transformers - Chapter 26
 6. Non strictness - Chapter 27
 7. IO - Chapter 29
+
+18. Monads -> Completed
+Thing to remember the unique sauce of monads is the join function m (m a) -> m a
+- The laws for monads are 3, left identity, right identity, associativity
+- The laws for functors are 2, identity & composition
+- The laws for applicatives are 4, identity, interchange, composition, homomorphism
+
