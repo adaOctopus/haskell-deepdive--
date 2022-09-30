@@ -91,3 +91,10 @@ instance Foldable Optional where
 -- 3
 -- Prelude> fmap length xs
 -- [1,1,1]
+
+-- ###### Same with `elem`
+-- It does not see outermost or left of Either or Maybe
+-- | Does the element occur
+-- in the structure?
+-- elem :: Eq a => a -> t a -> Bool
+
