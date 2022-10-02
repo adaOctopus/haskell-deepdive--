@@ -43,3 +43,11 @@ module Lawss where
 
 -- 3. Composition
 -- sequenceA . fmap Compose = Compose . fmap sequenceA . sequenceA
+
+-- Using QuickCheck
+-- U can validate all traversable laws
+-- type TI = []
+-- main = do
+-- let trigger :: TI (Int, Int, [Int])
+-- trigger = undefined
+-- quickBatch (traversable trigger)
