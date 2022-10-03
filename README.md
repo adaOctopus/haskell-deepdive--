@@ -188,21 +188,21 @@ Thing to remember the unique sauce of monads is the join function m (m a) -> m a
 -> 21. Traversable - Completed</br>
 `Remember`</br>
 
--- =========================
--- ====== REMEMBER =========
--- =========================
--- Functors are about fmap and lifting a function over to some structure, affecting values, never the structure
--- Foldable is about Monoids, without monoids, it does not understand what kind of function to apply foldMap over
--- Traverse is about fmap, and `ap` operator, and works with recursion mostly
+-- =========================</br>
+-- ====== REMEMBER =========</br>
+-- =========================</br>
+-- Functors are about fmap and lifting a function over to some structure, affecting values, never the structure</br>
+-- Foldable is about Monoids, without monoids, it does not understand what kind of function to apply foldMap over</br>
+-- Traverse is about fmap, and `ap` operator, and works with recursion mostly</br>
 
--- =========================
--- ====== NOTE =========
--- =========================
--- This might seem tedious at first, but remember our Foldable type class, 
--- as it also defines a function that is perfect for this particular use case: 
--- foldMap :: Monoid m => (a -> m) -> t a -> m. 
--- We can read this as:
--- Given a foldable containing things that aren’t Monoids, 
--- and a function that can convert a single thing to a Monoid, 
--- I’ll give you back a Monoid by traversing the foldable, 
--- converting everything to Monoids and folding them together.
+-- =========================</br>
+-- ====== NOTE =========</br>
+-- =========================</br>
+-- This might seem tedious at first, but remember our Foldable type class, </br>
+-- as it also defines a function that is perfect for this particular use case: </br>
+-- foldMap :: Monoid m => (a -> m) -> t a -> m. </br>
+-- We can read this as:</br>
+-- Given a foldable containing things that aren’t Monoids, </br>
+-- and a function that can convert a single thing to a Monoid, </br>
+-- I’ll give you back a Monoid by traversing the foldable, </br>
+-- converting everything to Monoids and folding them together.</br>
