@@ -125,3 +125,13 @@ instance Traversable TreeA where
 -- and a function that can convert a single thing to a Monoid, 
 -- I’ll give you back a Monoid by traversing the foldable, 
 -- converting everything to Monoids and folding them together.
+
+-- Useful things to remember for sequenceA & traverse, from Jacub Arnold's extra resource article
+
+-- instance Traversable [] where
+-- sequenceA [] = pure []
+-- sequenceA (x:xs) = (:) <$> x <*> sequenceA xs
+
+-- instance Traversable [] where
+--     traverse _ [] = pure []
+--     traverse f (x:xs) = (:) <$> f x <*> traverse f xs
