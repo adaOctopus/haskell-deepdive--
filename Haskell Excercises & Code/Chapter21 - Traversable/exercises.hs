@@ -80,8 +80,36 @@ instance (Functor (Bigger a), Foldable (Bigger a)) => Traversable (Bigger a) whe
 
 data S n a = S (n a) a deriving (Eq, Show)
 
-instance (Functor (S n), Foldable (S n)) => Traversable (S n) where
-    traverse f (S (n1 a) a') = S (n (f a)) <$> f a'
+instance (Functor (S n), Foldable (S n), Traversable n) => Traversable (S n) where
+    traverse f (S x y) = S <$> traverse f x <*> f y 
 
     --- Tomorrow do Tree instances and read the S one before
     ---- Read the article for traversable & foldable, and then tuesday move to Reader Monad
+
+-- Instances for Tree
+data TreeA a = Empty | Leaf a | Node (TreeA a) a (TreeA a) deriving (Eq, Show)
+
+-- Perfectly defined the Functor instance.
+instance Functor TreeA where 
+    fmap f Empty               = Empty
+    fmap f (Leaf x)            = Leaf (f x)
+    fmap f (Node leftT x rightT) = Node (fmap f leftT) (f x) (fmap f rightT)
+
+    -- Remember foldables are about Monoid
+    -- u did this wrong
+instance Foldable TreeA where 
+    foldMap f Empty                 = mempty
+    foldMap f (Leaf x)              = f x
+    foldMap f (Node leftT x rightT) = (foldMap f leftT) <> (f x) <> (foldMap f rightT)
+
+instance Traversable TreeA where
+    traverse f Empty          = pure $ Empty
+    traverse f (Leaf x)       = Leaf <$> f x
+    traverse f (Node lt x rt) = Node <$> traverse f lt <*> f x <*> traverse f rt
+
+-- =========================
+-- ====== REMEMBER =========
+-- =========================
+-- Functors are about fmap and lifting a function over to some structure, affecting values, never the structure
+-- Foldable is about Monoids, without monoids, it does not understand what kind of function to apply foldMap over
+-- Traverse is about fmap, and `ap` operator, and works with recursion mostly
