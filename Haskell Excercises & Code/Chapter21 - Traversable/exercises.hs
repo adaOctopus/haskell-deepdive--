@@ -113,3 +113,15 @@ instance Traversable TreeA where
 -- Functors are about fmap and lifting a function over to some structure, affecting values, never the structure
 -- Foldable is about Monoids, without monoids, it does not understand what kind of function to apply foldMap over
 -- Traverse is about fmap, and `ap` operator, and works with recursion mostly
+
+-- =========================
+-- ====== NOTE =========
+-- =========================
+-- This might seem tedious at first, but remember our Foldable type class, 
+-- as it also defines a function that is perfect for this particular use case: 
+-- foldMap :: Monoid m => (a -> m) -> t a -> m. 
+-- We can read this as:
+-- Given a foldable containing things that aren’t Monoids, 
+-- and a function that can convert a single thing to a Monoid, 
+-- I’ll give you back a Monoid by traversing the foldable, 
+-- converting everything to Monoids and folding them together.
