@@ -14,3 +14,11 @@ bbop = (+) <$> boop <*> doop
 
 duwop :: Integer -> Integer
 duwop = liftA2 (+) boop doop
+
+newtype Reader r a = Reader { runReader :: r -> a }
+
+
+ask :: Reader a a
+ask = Reader id
+
+-- a :: a -> a
