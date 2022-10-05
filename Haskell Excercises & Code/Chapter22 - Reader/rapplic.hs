@@ -42,9 +42,29 @@ newtype Reader r a = Reader { runReader :: r -> a }
 asks :: (r -> a) -> Reader r a
 asks f = Reader f
 
+instance Functor (Reader r) where
+  fmap f (Reader g) = Reader (f . g)
+
 instance Applicative (Reader r) where 
     pure :: a -> Reader r a
     pure a = Reader (const a)
     (<*>) :: Reader r (a -> b) -> Reader r a -> Reader r b
-    (Reader rab) <*> (Reader ra) = Reader $ \r -> ???
+    (Reader rab) <*> (Reader ra) = Reader $ (\x -> rab x (ra x))
+
+instance Monad (Reader r) where
+    return = pure
+    (>>=) :: Reader r a -> (a -> Reader r b) -> Reader r b
+    (Reader ra) >>= aRb = Reader $ \r -> aRb (r ra)
+
+-- ============= Reader Monad itself is boring
+-- ============================================
+
+instance Functor ((->) r) where
+    fmap = (.)
+instance Applicative ((->) r) where
+    pure = const
+    f <*> a = \r -> f r (a r)
+instance Monad ((->) r) where
+    return = pure
+    m >>= k = flip k <*> m
 
