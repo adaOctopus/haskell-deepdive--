@@ -61,6 +61,9 @@ data TestDatum = TestDatum {
 sequA :: Integral a => a -> [Bool]
 sequA m = sequenceA [(>3), (<8), even] m
 
+s' :: Maybe Integer
+s' = summed <$> ((,) <$> xs <*> ys)
+
 main :: IO ()
 main = do
     print $
@@ -76,4 +79,6 @@ main = do
     -- Solution to 1.
     print $ all (==True) . sequA $ 5
     -- Solution to 2.
+    print $ sequA . fromMaybe 0 $ s'
     -- Solution to 3.
+    print $ bolt . fromMaybe 0 $ ys
