@@ -206,3 +206,15 @@ Thing to remember the unique sauce of monads is the join function m (m a) -> m a
 -- and a function that can convert a single thing to a Monoid, </br>
 -- I’ll give you back a Monoid by traversing the foldable, </br>
 -- converting everything to Monoids and folding them together.</br>
+
+### Continuing the book</br>
+
+-> 22. Reader - Completed</br>
+`Remember`</br>
+
+-- =========================</br>
+-- ====== REMEMBER =========</br>
+-- =========================</br>
+-- Reader is basically all about partial applied functions. ((->) a)
+-- the functor of functions is basically composition
+-- the applicative of functions is again the `ap` attribute
