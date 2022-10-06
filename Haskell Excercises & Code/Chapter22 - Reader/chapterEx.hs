@@ -47,3 +47,33 @@ x3 n = (z' n, z' n)
 -- the first argument
 summed :: Num c => (c, c) -> c
 summed tup = uncurry (\n1 n2 -> n1 + n2) tup
+
+bolt :: Integer -> Bool
+-- use &&, >3, <8
+bolt n = (n > 3) && (n < 8) -- alternative: liftA2 (&&) (>3) (<8)
+
+
+data TestDatum = TestDatum {
+    adaValue :: Integer,
+    scriptState:: String
+} deriving (Eq,Show)
+
+sequA :: Integral a => a -> [Bool]
+sequA m = sequenceA [(>3), (<8), even] m
+
+main :: IO ()
+main = do
+    print $
+        sequenceA [Just 3, Just 2, Just 1]
+    print $ sequenceA [x, y]
+    print $ sequenceA [xs, ys]
+    print $ summed <$> ((,) <$> xs <*> ys)
+    print $ fmap summed ((,) <$> xs <*> zs)
+    print $ bolt 7
+    print $ fmap bolt z
+    print $ sequenceA [(>3), (<8), even] 7
+    -- Page Before Rewriting Shawty
+    -- Solution to 1.
+    print $ all (==True) . sequA $ 5
+    -- Solution to 2.
+    -- Solution to 3.
