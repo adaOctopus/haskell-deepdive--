@@ -21,6 +21,18 @@ maintainer:         anastasios.valtinos@trint.com
 -- category:
 extra-source-files: CHANGELOG.md
 
+library
+ exposed-modules: RandomTwo,
+                  StateInstances,
+                  ChapterEx
+ ghc-options: -Wall -fwarn-tabs
+ build-depends: base >=4.7 && <5
+                , hspec
+                , random
+                , transformers
+ hs-source-dirs: app
+ default-language: Haskell2010
+
 executable testingState
     main-is:          StateTest.hs
 
