@@ -218,3 +218,7 @@ Thing to remember the unique sauce of monads is the join function m (m a) -> m a
 -- Reader is basically all about partial applied functions. ((->) a)
 -- the functor of functions is basically composition
 -- the applicative of functions is again the `ap` attribute
+
+### Continuing the book</br>
+
+-> 23. State - Completed</br>
