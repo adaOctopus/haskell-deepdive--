@@ -42,3 +42,15 @@ data SuperDrei a b c = SuperDrei a b
 
 instance Bifunctor (SuperDrei a) where
     bimap f _ (SuperDrei a b) = SuperDrei a (f b)
+
+-- 5. 
+data SemiDrei a b c = SemiDrei a
+
+instance Bifunctor (SemiDrei a) where
+    bimap _ _ (SemiDrei a) = SemiDrei a
+
+-- 6. 
+data Quadriceps a b c d = Quadzzz a b c d
+
+instance Bifunctor (Quadriceps a b) where
+    bimap f g (Quadzzz a b c d) = Quadriceps a b (f c) (g d)
