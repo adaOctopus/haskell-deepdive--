@@ -53,4 +53,13 @@ instance Bifunctor (SemiDrei a) where
 data Quadriceps a b c d = Quadzzz a b c d
 
 instance Bifunctor (Quadriceps a b) where
-    bimap f g (Quadzzz a b c d) = Quadriceps a b (f c) (g d)
+    bimap f g (Quadzzz a b c d) = Quadzzz a b (f c) (g d)
+    first f (Quadzzz a b c d)   = Quadzzz a b (f c) d
+    second f (Quadzzz a b c d)  = Quadzzz a b c (f d)
+
+-- 7. 
+data MyEither a b = MyLeft a | MyRight b
+
+instance Bifunctor MyEither where
+    bimap f g (MyLeft a)  = MyLeft (f a)
+    bimap f g (MyRight b) = MyRight (g b) 
