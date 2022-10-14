@@ -12,7 +12,7 @@ newtype IdentityT f a =
     IdentityT { runIdentityT :: f a }
     deriving (Eq, Show)
 
-instance Functor Identity where 
+instance Functor Identity where
     fmap f (Identity a) = Identity (f a)
 
 instance (Functor m) => Functor (IdentityT m) where
@@ -28,7 +28,7 @@ instance (Applicative m) => Applicative (IdentityT m) where
 
 instance Monad Identity where
     return = pure
-    (Identity a) >>= f = f a
+(Identity a) >>= f = f a
 
 instance (Monad m) => Monad (IdentityT m) where
     return = pure

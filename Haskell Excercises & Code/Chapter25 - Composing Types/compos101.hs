@@ -34,6 +34,7 @@ instance (Applicative f, Applicative g) => Applicative (Compose f g) where
     --(<*>) :: Compose f g (a -> b) -> Compose f g a -> Compose f g b
     -- this is wrong
     -- (Compose f) <*> (Compose a) = Compose $ (fmap <*> f) <*> a
+    Compose f <*> Compose x = Compose ((<*>) <$> f <*> x)
 
 instance (Foldable f, Foldable g) => Foldable (Compose f g) where
     foldMap f (Compose fga) = (foldMap . foldMap) f fga
