@@ -42,12 +42,17 @@ instance (Arbitrary a, Arbitrary b) => Arbitrary (TestData a b) where
 
 randomGen = sample' (genArbit :: Gen (TestData Int Int))
 
+-- extractContext :: IO [TestData Int Int] -> [TestData Int Int]
+-- extractContext (IO x) = x
+
 -- Function for Identity Law
 validateFunctorIdent :: IO Bool
 validateFunctorIdent = do
     context <- randomGen
     print $ context
     let checkUp = fmap id context
+        boolCheck = fmap id context == context
+    quickCheck boolCheck
     case checkUp == context of
         True -> return $ True
         False -> return $ False
