@@ -14,5 +14,5 @@ module EvEx where
 -- ((((foldr const 'z' ['a','b']) const 'c' ) const 'd') const 'e')
 -- (((((foldr const 'z' ['a']) const 'b') const 'c') const 'd') const 'e'
 -- ((((((foldr const 'z' [] ) const 'a' ) const 'b') const 'c') const 'd') const 'e')
--- Wrong reasoning 
+-- Wrong reasoning but answer = 'a'
 7. foldr (flip const) 'z' ['a'..'e']
