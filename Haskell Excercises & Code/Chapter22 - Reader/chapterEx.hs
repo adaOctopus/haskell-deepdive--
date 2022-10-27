@@ -82,3 +82,5 @@ main = do
     print $ sequA . fromMaybe 0 $ s'
     -- Solution to 3.
     print $ bolt . fromMaybe 0 $ ys
+
+newtype Coin a = Coin a

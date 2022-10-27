@@ -12,3 +12,13 @@ instance (Applicative f) => Applicative (IdentityT f) where
     pure x = IdentityT $ pure x
     (IdentityT fab) <*> (IdentityT fa) = IdentityT (fab <*> fa) 
         -- f (a -> b)    f a
+
+instance (Monad f) => Monad (IdentityT f) where
+    return = pure
+    (IdentityT fa) >>= fab = IdentityT $ fa >>= runIdentityT . fab
+
+    -- 
+
+    -- fa :: f a
+    -- fab :: (a -> f b)
+    -- fmap fab fa :: f (f b)

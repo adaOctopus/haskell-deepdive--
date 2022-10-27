@@ -3,6 +3,8 @@
 
 module ChaptEx where
 
+import Control.Concurrent
+
 data List a = Nil | Cons a (List a) deriving (Show)
 
 take' n _ | n <= 0 = Nil
@@ -17,3 +19,15 @@ repeat' x = xs
 
 main = do
     print $ take' 10 $ map' (+1) (repeat' 1)
+
+kx = undefined
+ky = "blah"
+main' = do
+    print (snd (kx,kx `seq` ky))
+
+main'' :: IO ()
+main'' = do 
+    mv <- newEmptyMVar
+    putMVar mv (0 :: Int)
+    zero <- takeMVar mv
+    print (zero)

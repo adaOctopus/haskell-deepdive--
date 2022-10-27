@@ -1,3 +1,4 @@
+{-# LANGUAGE ScopedTypeVariables #-}
 module Trivial where
 
 import Test.QuickCheck
@@ -29,6 +30,6 @@ data Pair a b = Pair a b deriving (Eq, Show)
 
 pairGen :: (Arbitrary a, Arbitrary b) => Gen (Pair a b)
 pairGen = do 
-    a <- arbitrary
-    b <- arbitrary
-    return (Pair a b)
+    a :: Int <- arbitrary
+    b :: Int <- arbitrary
+    return (Pair a b :: Pair Int Int)

@@ -131,6 +131,7 @@ instance Traversable TreeA where
 -- instance Traversable [] where
 -- sequenceA [] = pure []
 -- sequenceA (x:xs) = (:) <$> x <*> sequenceA xs
+-- sequenceA:: (Traversable t, Applicative f) => t (f a) -> f (t a)
 
 -- instance Traversable [] where
 --     traverse _ [] = pure []

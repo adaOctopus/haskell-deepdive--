@@ -47,3 +47,7 @@ exec sa s = snd $ runMoi sa s
 --4. Get the value that results
 eval :: Moi s a -> s -> a
 eval (Moi sa) s = fst $ runMoi (Moi sa) s
+
+-- 5. Applies a function to return a new stte
+modify :: (s -> s) -> Moi s ()
+modify f = f . put 
