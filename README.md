@@ -1,6 +1,8 @@
 # Haskell Deepdive from First Principles
 This is a repository of my deepdive into haskell via using First Principles book. After doing 2 courses in Haskell in University of Nottingham, Im diving deeper with this 2,000 pages book -> Haskell from First Principles
 
+# Also started the Book of Monads by Alejandro Garcia
+## It is meant to give a more in depth understanding of how Monadic Structures work and what monads are really about!
 ## Chapters completed so far
 -> 1. Lambda Calculus <br/>
 -> 2. Hello Haskell <br/>
