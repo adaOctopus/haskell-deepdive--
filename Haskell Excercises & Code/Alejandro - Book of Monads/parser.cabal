@@ -11,5 +11,6 @@ library
  exposed-modules: JSONParser
  ghc-options: -Wall -fwarn-tabs
  build-depends: base >=4.7 && <5
+                , mtl
  hs-source-dirs: .
  default-language: Haskell2010

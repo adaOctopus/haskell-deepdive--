@@ -1,5 +1,7 @@
 module WithCounting where
 
+import Control.Monad.State as CMS
+
 -- Chapter 1. Exercises and Practice
 type WithCounter a = Int -> (a, Int)
 
@@ -23,10 +25,10 @@ pure x = \i -> (x, i)
 type State s a = s -> (a, s)
 
 -- rewrite next & pure
-next' :: State s a -> (a -> State s b) -> State s b
+next' :: CMS.State s a -> (a -> CMS.State s b) -> CMS.State s b
 f `next'` g = \i -> let (r, i') = f i in g r i'
 
-pure' :: a -> State s a
+pure' :: a -> CMS.State s a
 pure' x = \s -> (x, s) 
 
 -- 1.2
@@ -54,7 +56,7 @@ flatten :: Maybe (Maybe a) -> Maybe a
 flatten (Just (Just x)) = Just x
 flatten _               = Nothing
 
-flatten' oo = then_ oo id
-            -- case oo of 
-                Nothing -> Nothing
-                Just x -> id x ==> x
+-- flatten' oo = then_ oo id
+--             -- case oo of 
+--                 Nothing -> Nothing
+--                 Just x -> id x ==> x
