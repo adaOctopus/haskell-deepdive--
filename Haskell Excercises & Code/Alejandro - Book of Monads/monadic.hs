@@ -17,3 +17,11 @@ ap'' mf mx = do
 
 -- fmap'' :: Functor f => (a -> b) -> f a -> f b
 fmap'' f a = pure f `ap` a
+
+-- Ex 3.3 Write ZipList functor instancce
+
+newtype ZipList a = ZipList { getZipList :: [a] } deriving (Eq, Show)
+-- so getZipList type :: ZipList a -> [a]
+
+instance Functor ZipList where
+    fmap f (ZipList gz) = ZipList $ fmap f gz 
