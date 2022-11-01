@@ -26,7 +26,7 @@ newtype ZipList a = ZipList { getZipList :: [a] } deriving (Eq, Show)
 instance Functor ZipList where
     fmap f (ZipList gz) = ZipList $ fmap f gz
 
-newtype State'' s a = State { runState' :: s -> (a,s) }
+newtype State'' s a = State { runState :: s -> (a,s) }
 
 -- runState :: State s a -> s -> (a,s)
 
@@ -39,15 +39,3 @@ instance Applicative (State'' s) where
     State fz <*> State xz = State $ \s -> let a =  fst $ xz s
                                               ab = fst $ fz s
                                           in (ab a, s)
-
-instance Monad (State'' s) where
-    return x = State $ \s -> (x, s) 
-    rsa >>= f = State $ \input -> let (a, input')   = runState' rsa input
-                                      (a', input'') = runState' (f a) input'
-                                  in  (a', input'')
-                                    
-
-        
-    -- let (a, s) = rsa input in (f a, s)
-    -- m a -> (a -> m b) -> m b
-    -- State s a -> ( a -> State s b) -> State s b
