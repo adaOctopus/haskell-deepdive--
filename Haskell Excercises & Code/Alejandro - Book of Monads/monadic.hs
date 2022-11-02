@@ -51,3 +51,18 @@ instance Monad (State'' s) where
     -- let (a, s) = rsa input in (f a, s)
     -- m a -> (a -> m b) -> m b
     -- State s a -> ( a -> State s b) -> State s b
+
+newtype Reader'' r a = Reader'' { runReader'' :: r -> a}
+
+instance Functor (Reader'' r) where
+    fmap f (Reader'' ra) = Reader'' $ fmap f ra
+
+instance Applicative (Reader'' r) where
+    pure x = Reader'' $ \_ -> x
+    Reader'' fa <*> Reader'' xa = Reader'' $ \input -> let a  = xa input
+                                                           ab = fa input
+                                                       in ab a
+
+instance Monad (Reader'' r) where
+    return x = Reader'' $ \_ -> x
+    rra >>= f = Reader'' $ \input -> let a = runReader'' rra input in runReader'' (f a) input
