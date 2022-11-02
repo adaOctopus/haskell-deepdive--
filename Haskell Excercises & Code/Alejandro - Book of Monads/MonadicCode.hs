@@ -2,7 +2,7 @@
 module MonadicCode where
 
 import Control.Monad.State as CMS
-
+import System.Random
 
 -- implement `ap` yourself
 
@@ -66,3 +66,33 @@ instance Applicative (Reader'' r) where
 instance Monad (Reader'' r) where
     return x = Reader'' $ \_ -> x
     rra >>= f = Reader'' $ \input -> let a = runReader'' rra input in runReader'' (f a) input
+
+-- Contravariant instance of a Predicate
+
+newtype Returns r a = R (r -> a)
+
+newtype Predicate a = Predicate { runPredicate :: a -> Bool}
+through :: (a -> b) -> Predicate b -> Predicate a
+through f (Predicate p) = Predicate (p . f)
+
+-- instance Functor (Returns r) where
+--     fmap f (R ra) = R (ra . f)
+
+-- instance Contravariant (Returns r) where
+
+-- Functor, Applcive, Monad for Either
+
+data EitherX e r = LeftX e | RightX r deriving (Eq,Show)
+
+instance Functor (EitherX e) where
+    fmap f (LeftX er) = LeftX er
+    fmap f (RightX re) = RightX (f re)
+
+instance Applicative (EitherX e) where
+    pure x = RightX x
+    fa <*> xa = do f <- fa; x <- xa; return (f x)
+
+instance Monad (EitherX e) where
+        return = RightX
+        RightX m >>= k = k m
+        LeftX e  >>= _ = LeftX e
