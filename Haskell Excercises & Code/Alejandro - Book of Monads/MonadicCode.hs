@@ -96,3 +96,23 @@ instance Monad (EitherX e) where
         return = RightX
         RightX m >>= k = k m
         LeftX e  >>= _ = LeftX e
+
+
+newtype MaybeTX m a = MaybeTX { runMaybeTX :: m (Maybe a)}
+
+instance Functor m => Functor (MaybeTX m) where
+    fmap f (MaybeTX ma) = MaybeTX $ (fmap . fmap) f ma
+
+instance Applicative m => Applicative (MaybeTX m) where
+    pure x = MaybeTX (pure (pure x))
+    MaybeTX rfa <*> MaybeTX rxa = MaybeTX $ (<*>) <$> rfa <*> rxa
+
+instance Monad m => Monad (MaybeTX m) where
+    return x = MaybeTX $ return (Just x)
+    MaybeTX ma >>= f = MaybeTX $ do
+                         maybeValue <- ma
+                         case maybeValue of
+                            Nothing -> return Nothing
+                            Just y -> runMaybeTX (f y)
+
+
