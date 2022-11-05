@@ -12,13 +12,12 @@ newtype ParserX a = P (String -> [(a, String)])
 -- zeroX :: ParserX a
 -- zeroX = \inp -> []
 
--- itemX :: ParserX Char
--- itemX = \inp -> case inp of
---                     [] -> []
---                     (x:xs) -> [(x,xs)]
+itemX :: ParserX Char
+itemX = P (\inp -> case inp of
+                  [] -> []
+                  (x:xs) -> [(x,xs)])
 
--- sat :: (Char -> Bool) -> ParserX Char
--- sat p = itemX `bind` \x -> if p x then resultX x else zeroX
+
 
 parse :: ParserX a -> String -> [(a, String)]
 parse (P p) s = p s
@@ -41,9 +40,14 @@ instance Monad ParserX where
                              [] -> []
                              [(x, out)] -> parse (f x) out
 
+instance Alternative ParserX where
+    empty = P $ \input -> []
+    p <|> q = P $ \input -> case parse p input of
+                              []         -> parse q input
+                              [(x, out)] -> [(x, out)] 
 
--- sat :: (Char -> Bool) -> ParserX Char 
--- sat p = do x <- item
---            if px then return x else empty
+sat :: (Char -> Bool) -> ParserX Char 
+sat p = do x <- itemX
+           if p x then return x else empty
 
 
