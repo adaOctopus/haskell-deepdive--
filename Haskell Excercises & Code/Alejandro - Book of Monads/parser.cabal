@@ -9,7 +9,9 @@ cabal-version: >=1.10
 
 library
  exposed-modules: JSONParser
-                  , Monadic
+                  , MonadicCode
+                  , TicTacToe
+                  , ParserComb
  ghc-options: -Wall -fwarn-tabs
  build-depends: base >=4.7 && <5
                 , mtl
