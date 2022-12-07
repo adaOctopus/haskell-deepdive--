@@ -227,3 +227,6 @@ Thing to remember the unique sauce of monads is the join function m (m a) -> m a
 -> Chapter Nonstrictness finished
 -> Chapter IO finished
 -> Doing deepdive into Monad Transformers, State Monad & JSON Parsers
+
+
+Completed the book!
